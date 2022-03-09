@@ -7,9 +7,7 @@ btnPlay.addEventListener('click', startGame);
 
 
 
-function selectedSquareChangeColor() {
-    this.classList.add('square-selected-color');
-}
+
 
 function startGame() {
 
@@ -47,21 +45,35 @@ function startGame() {
         }
     }
 
-    // inizio seconda parte esercizio 
-    const arrRandom = [];
+// inizio seconda parte esercizio 
+    const arrRandomBombs = [];
 
     for (i = 0; i < 16; i++) {
         let randomNum;
-        
+
         // ciclo per avere 16 numeri random diversi
         do{
             randomNum = getRandomNum(1, 16);
-        }while(arrRandom.includes(randomNum)){ //per non avere numeri doppo
-        arrRandom.push(randomNum)
+        }while(arrRandomBombs.includes(randomNum)){ //per non avere numeri doppo
+        arrRandomBombs.push(randomNum)
 
         }
     }
-    console.log(arrRandom)
+    console.log(arrRandomBombs)
+
+
+    function selectedSquareChangeColor(element) {
+        
+        squareValue = parseInt(this.innerHTML);
+        console.log('valore square', squareValue);
+        
+        
+        if (arrRandomBombs.includes(squareValue)){ // = se in arrrandomBombs è incluso il valore di squareValue abbiamo preso una bomba
+            this.classList.add('square-selected-color-bomb'); //cambia colore al click (BOMBA)
+        }else{
+            this.classList.add('square-selected-color'); //cambia colore al click
+        }
+    }
 }
 
 
@@ -69,3 +81,4 @@ function startGame() {
 function getRandomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+

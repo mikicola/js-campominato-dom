@@ -114,6 +114,12 @@ hard/7
     color: white;
 }
 
+.square-selected-color-bomb{
+    background-color: rgb(255, 68, 68);
+    border: 1px solid black;
+    color: white;
+}
+
 footer{
     height: 50px;
     background-color: white;
