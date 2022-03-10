@@ -19,6 +19,8 @@ function startGame() {
         for (let i = 1; i <= 100; i++) {
             let square = document.createElement("div");
             square.classList.add("square-easy");
+            square.classList.add("square");
+
             gameArea.append(square);
             square.innerHTML = i;
 
@@ -31,6 +33,7 @@ function startGame() {
         for (let i = 1; i <= 81; i++) {
             let square = document.createElement("div");
             square.classList.add("square-medium");
+            square.classList.add("square");
             gameArea.append(square);
             square.innerHTML = i;
 
@@ -42,6 +45,7 @@ function startGame() {
         for (let i = 1; i <= 6; i++) {//49; da ripristinare
             let square = document.createElement("div");
             square.classList.add("square-hard");
+            square.classList.add("square");
             gameArea.append(square);
             square.innerHTML = i;
 
@@ -74,10 +78,14 @@ function startGame() {
     function selectedSquareChangeColor(element) {    
         squareValue = parseInt(this.innerHTML);
         console.log('valore square', squareValue);
+        const squares = document.querySelectorAll('.square'); //ho agginto .square a tutti (square-easy, -medium e -hard) per selezionarli e rimuovere add event listener per non far andare click dopo vittoria o sconfitta
             
             if (arrRandomBombs.includes(squareValue)){ // = se in arrrandomBombs è incluso il valore di squareValue abbiamo preso una bomba
                 this.classList.add('square-selected-color-bomb'); //cambia colore al click (BOMBA)
                 console.log('hai perso, hai preso una bomba!')
+                for(i = 0; i < squares.length; i++){
+                    squares[i].removeEventListener('click', selectedSquareChangeColor);
+                }//blocca il gioco
     
                 message.innerHTML = 'Hai preso una bomba! Hai totalizzato ' + score + ' punti' 
             }else{
@@ -86,7 +94,12 @@ function startGame() {
             }
 
             if (score == goodSquares){ //se il punteggio è uguale alle good squares hai vinto
-                message.innerHTML = 'Hai vinto! Hai totalizzato ' + score + ' punti' 
+                message.innerHTML = 'Hai vinto! Hai totalizzato ' + score + ' punti' ;
+
+
+                for(i = 0; i < squares.length; i++){
+                    squares[i].removeEventListener('click', selectedSquareChangeColor);
+                }//blocca il gioco
             }
         
 
