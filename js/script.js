@@ -4,7 +4,7 @@ const gameArea = document.querySelector('.game-area');
 let level = document.getElementById('level');
 
 const message = document.querySelector('.message')
-const bombNum = 2; //16; da ripristinare
+const bombNum = 16;
 
 btnPlay.addEventListener('click', startGame);
 
@@ -42,21 +42,19 @@ function startGame() {
             console.log(i)
         }
     } else if (level.value == 'Hard') {
-        for (let i = 1; i <= 6; i++) {//49; da ripristinare
+        for (let i = 1; i <= 49; i++) {
             let square = document.createElement("div");
             square.classList.add("square-hard");
             square.classList.add("square");
             gameArea.append(square);
             square.innerHTML = i;
 
-            totSquares = 6;
-            //49; da ripristinare
+            totSquares = 49;
             square.addEventListener('click', selectedSquareChangeColor);
             console.log(i)
         }
     }
 
-// inizio seconda parte esercizio 
     const arrRandomBombs = [];
 
     for (i = 0; i < bombNum; i++) {
@@ -70,7 +68,7 @@ function startGame() {
 
         }
     }
-    console.log(arrRandomBombs.sort()) //.sort() mette i num in ordire
+    console.log(arrRandomBombs.sort()) //.sort() mette i num in ordire circa
 
     const goodSquares = totSquares - bombNum; //definisco le squres belle e gentili
     // console.log('le buone sono ' + goodSquares)
@@ -107,9 +105,6 @@ function startGame() {
     }
 }
 
-
-
 function getRandomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
