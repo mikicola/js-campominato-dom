@@ -1,6 +1,9 @@
 const idLevel = document.getElementById('level');
 const btnPlay = document.querySelector('.btn-play');
 const gameArea = document.querySelector('.game-area');
+
+const message = document.querySelector('.message')
+
 let level = document.getElementById('level');
 
 btnPlay.addEventListener('click', startGame);
@@ -10,6 +13,8 @@ btnPlay.addEventListener('click', startGame);
 
 
 function startGame() {
+    message.innerHTML = '';
+    let score = 0; //definisco punteggio iniziale
 
     gameArea.innerHTML = '';
     if (level.value == 'Easy') {
@@ -70,9 +75,15 @@ function startGame() {
         
         if (arrRandomBombs.includes(squareValue)){ // = se in arrrandomBombs è incluso il valore di squareValue abbiamo preso una bomba
             this.classList.add('square-selected-color-bomb'); //cambia colore al click (BOMBA)
+            console.log('hai perso, hai preso una bomba!')
+
+            message.innerHTML = 'Hai preso una bomba! Hai totalizzato ' + score + ' punti' 
         }else{
             this.classList.add('square-selected-color'); //cambia colore al click
+            score++ //incremento del punteggio
         }
+
+        this.removeEventListener('click', selectedSquareChangeColor); //impedisce di ripremere su un elemento square
     }
 }
 
